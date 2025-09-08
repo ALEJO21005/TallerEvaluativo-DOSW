@@ -1,5 +1,6 @@
 package com.sergio.tallerPractico.gestionInventario;
 
+import GestionInventario.Producto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class ProductoTest {
 
     private Producto producto;
-    ArrayList<Producto> productos;
+    private ArrayList<Producto> productos;
 
     @BeforeEach
     public void setUp() {
