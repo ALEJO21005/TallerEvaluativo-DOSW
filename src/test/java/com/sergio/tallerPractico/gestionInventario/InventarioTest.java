@@ -1,10 +1,9 @@
 package com.sergio.tallerPractico.gestionInventario;
 
-import GestionInventario.Producto;
+import GestionInventario.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InventarioTest {
@@ -23,17 +22,21 @@ public class InventarioTest {
     @Test
     public void agregarInventarioTest() {
         inventario.agregarProducto(lavadora);
-        assertEquals(1, inventario.getInventarioProductos().size());
-        assertTrue(inventario.getInventarioProductos().containsKey("Lavadora"));
+        Producto televisor = new Producto("Televisor", 800.0, 10, "Electrodomésticos");
+        inventario.agregarProducto(televisor);
+        assertEquals(2, inventario.getInventarioProductos().size());
     }
 
     @Test
     public void actualizarInventarioProductoTest() {
-        inventario.modificarCantidadProducto("lavadora", 3);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            inventario.modificarCantidadProducto("lavadora", 3);
+        });
         Producto televisor = new Producto("Televisor", 800.0, 10, "Electrodomésticos");
         inventario.agregarProducto(televisor);
         inventario.modificarCantidadProducto("Televisor", -5);
-        assertEquals(5, inventario.getInventarioProductos().size());
-        assertEquals(8, inventario.getCantidadProductos().get("Lavadora").getCantidad());
+        assertEquals("Producto no encontrado en el inventario", exception.getMessage());
+        assertEquals(5, inventario.getCantidadProductos("Televisor"));
     }
 }
