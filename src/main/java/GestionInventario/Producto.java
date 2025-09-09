@@ -8,7 +8,7 @@ public class Producto {
     private double precio;
     private int cantidad;
     private String categoria;
-    private ArrayList<Producto> productos;
+    private Inventario inventario = new Inventario();
 
     public Producto(String nombre, double precio, int cantidad, String categoria) {
         this.nombre = nombre;
@@ -16,14 +16,19 @@ public class Producto {
         if (cantidad < 0) {throw new IllegalArgumentException("La cantidad no puede ser negativa");}
         else {this.cantidad = cantidad;}
         this.categoria = categoria;
-        this.productos = new ArrayList<>();
+
     }
 
     public int getCantidad() {return cantidad;}
+    public String getNombre() {return nombre;}
+
 
     public void setCantidad(int cantidad) {
-        if (cantidad < 0) {throw new IllegalArgumentException("La cantidad no puede ser negativa");}
-        this.cantidad += cantidad;
+        int nuevaCantidad = this.cantidad + cantidad;
+        if (nuevaCantidad < 0) {
+            throw new IllegalArgumentException("La cantidad no puede ser negativa");
+        }
+        this.cantidad = nuevaCantidad;
     }
 
 
